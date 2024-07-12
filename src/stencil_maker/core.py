@@ -70,7 +70,7 @@ def draw_base_image(
 
     img_size = calculate_image_size(bbox, margin)
 
-    image = Image.new("RGB", img_size, color=background_color)
+    image = Image.new("L", img_size, color=background_color)
     draw = ImageDraw.ImageDraw(image)
 
     offset = margin
