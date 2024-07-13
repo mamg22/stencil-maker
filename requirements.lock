@@ -3,8 +3,8 @@
 #
 # last locked with the following flags:
 #   pre: false
-#   features: ["server"]
-#   all-features: false
+#   features: []
+#   all-features: true
 #   with-sources: false
 #   generate-hashes: false
 
@@ -22,7 +22,9 @@ jinja2==3.1.4
 markupsafe==2.1.5
     # via jinja2
     # via werkzeug
-pillow==10.3.0
+pillow==10.4.0
+    # via stencil-maker
+python-dotenv==1.0.1
     # via stencil-maker
 werkzeug==3.0.3
     # via flask

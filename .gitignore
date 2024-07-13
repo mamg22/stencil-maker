@@ -10,3 +10,8 @@ wheels/
 .venv
 fonts/*
 .vscode/settings.json
+
+.env
+pyrightconfig.json
+
+src/stencil_maker/static/3rdparty

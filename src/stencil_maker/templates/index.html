@@ -1,0 +1,42 @@
+{%- set flip_checked = "checked" if request.args['flip'] == "on" -%}
+{%- set fill_checked = "checked" if request.args['fill'] == "on" -%}
+{%- set size_value = request.args.get("fontsize", 300) -%}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="https://unpkg.com/htmx.org@2.0.0"></script>
+        <script defer src="{{ url_for('static', filename='main.js')}}"></script>
+        <!-- <link rel="stylesheet" href="https://unpkg.com/simpledotcss/simple.min.css"> -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <form id="params" action="/" hx-get="/fragments/result" hx-target="#result" hx-swap="outerHTML">
+            <label>
+                Texto:<br>
+                <textarea rows="6" name="text" required>{{ request.args.text }}</textarea>
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" name="flip" {{ flip_checked }}>Voltear
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" name="fill" {{ fill_checked }}>Rellenar
+            </label>
+            <br>
+            <!-- <details> -->
+            <!-- <summary>Avanzado</summary> -->
+            <label>
+                Tamaño de letra:<br>
+                <input type="number" name="fontsize" id="fontsize" min="1" max="500" value="{{ size_value }}">
+            </label>
+            <br>
+            <!-- </details> -->
+            <button type="submit">Crear</button>
+        </form>
+        {% include 'result-fragment.html' %}
+    </body>
+</html>
