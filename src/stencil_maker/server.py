@@ -2,16 +2,22 @@ from io import BytesIO
 import os
 import sys
 
-from flask import (
-    Flask,
-    Blueprint,
-    render_template,
-    request,
-    send_file,
-    make_response,
-    url_for,
-)
-from dotenv import load_dotenv
+try:
+    from flask import (
+        Flask,
+        Blueprint,
+        render_template,
+        request,
+        send_file,
+        make_response,
+        url_for,
+    )
+    from dotenv import load_dotenv
+except ModuleNotFoundError as err:
+    err.add_note(
+        "Could not load required dependency, try installing this package with the [server] extra enabled"
+    )
+    raise
 
 from stencil_maker import make_stencil
 
