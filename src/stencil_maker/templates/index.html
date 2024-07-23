@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
     <body>
-        <form id="params" action="/" hx-get="/fragments/result" hx-target="#result" hx-swap="outerHTML">
+        <form id="params" action="{{ url_for('index') }}" hx-get="{{ url_for('result') }}" hx-target="#result" hx-swap="outerHTML">
             <label>
                 Texto:<br>
                 <textarea rows="6" name="text" required>{{ request.args.text }}</textarea>
@@ -27,14 +27,11 @@
                 <input type="checkbox" name="fill" {{ fill_checked }}>Rellenar
             </label>
             <br>
-            <!-- <details> -->
-            <!-- <summary>Avanzado</summary> -->
             <label>
                 Tamaño de letra:<br>
                 <input type="number" name="fontsize" id="fontsize" min="1" max="500" value="{{ size_value }}">
             </label>
             <br>
-            <!-- </details> -->
             <button type="submit">Crear</button>
         </form>
         {% include 'result-fragment.html' %}
