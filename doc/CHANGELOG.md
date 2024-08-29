@@ -1,5 +1,5 @@
 # Changelog
 
-## 0.1.0 - TBA
+## 0.1.0 - 2024-08-29
 
 Initial version.
