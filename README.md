@@ -4,22 +4,29 @@ Generate an image as a text stencil, with custom fonts, sizes and optionally fli
 
 ## Installation
 
+### From PyPI
+
+```
+$ pip install stencil_maker
+```
+
+To install with the server mode enabled, include the `[server]` extra feature when installing:
+
+```
+$ pip install 'stencil_maker[server]'
+```
+
+### From prebuilt packages
+
 Get a instalable wheel from the [releases page](https://github.com/mamg22/stencil-maker/releases), once it downloads, install it with:
 
 ```console
 $ pip install stencil_maker-VERSION-py3-none-any.whl
 $ # The VERSION might be different depending on the version downloaded
-```
 
-To install with the server mode enabled, include the `[server]` extra feature when installing:
-
-```console
+$ # Or with server mode
 $ pip install 'stencil_maker-VERSION-py3-none-any.whl[server]'
 ```
-
-### From PyPI
-
-Coming soon
 
 ## Usage
 

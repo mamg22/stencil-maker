@@ -1,6 +1,6 @@
 [project]
 name = "stencil-maker"
-version = "0.1.0"
+version = "0.1.1"
 description = "Generate an image for a text stencil"
 authors = [
     { name = "mamg22", email = "45301823+mamg22@users.noreply.github.com" }
