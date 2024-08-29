@@ -8,7 +8,7 @@ Get a instalable wheel from the [releases page](https://github.com/mamg22/stenci
 
 ```console
 $ pip install stencil_maker-VERSION-py3-none-any.whl
-$ # The VERSION might be different depending on the version downlaoded
+$ # The VERSION might be different depending on the version downloaded
 ```
 
 To install with the server mode enabled, include the `[server]` extra feature when installing:
