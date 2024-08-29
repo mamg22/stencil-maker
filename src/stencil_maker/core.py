@@ -78,7 +78,7 @@ def draw_base_image(
         adjbox = box.transformed(margin - box.x0, offset - box.y0)
 
         draw.text(
-            adjbox.transformed(-box.x0, -box.y0),
+            adjbox.transformed(-box.x0, -box.y0)[:2],
             text,
             font=font,
             fill=fill_color,

@@ -13,26 +13,31 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
     <body>
-        <form id="params" action="{{ url_for('index') }}" hx-get="{{ url_for('result') }}" hx-target="#result" hx-swap="outerHTML">
+        <form id="params" action="{{ url_for('index') }}"
+            hx-get="{{ url_for('result') }}" hx-target="#result" hx-swap="outerHTML"
+            hx-disabled-elt="#create-button">
             <label>
                 Texto:<br>
-                <textarea rows="6" name="text" required>{{ request.args.text }}</textarea>
+                <textarea rows="6" cols="30" name="text" required id="text">{{ request.args.text }}</textarea>
             </label>
-            <br>
-            <label>
-                <input type="checkbox" name="flip" {{ flip_checked }}>Voltear
-            </label>
-            <br>
-            <label>
-                <input type="checkbox" name="fill" {{ fill_checked }}>Rellenar
-            </label>
-            <br>
-            <label>
-                Tamaño de letra:<br>
-                <input type="number" name="fontsize" id="fontsize" min="1" max="500" value="{{ size_value }}">
-            </label>
-            <br>
-            <button type="submit">Crear</button>
+            <fieldset>
+                <legend>Opciones</legend>
+                <label>
+                    <input type="checkbox" name="flip" id="flip" {{ flip_checked }}>Voltear
+                </label>
+                <br>
+                <label>
+                    <input type="checkbox" name="fill" id="fill" {{ fill_checked }}>Rellenar
+                </label>
+                <br>
+                <label>
+                    Tamaño de letra:
+                    <input type="number" name="fontsize" id="fontsize" min="1" max="500" value="{{ size_value }}">
+                </label>
+            </fieldset>
+            <div class="spacer"></div>
+            <div class="htmx-indicator">Cargando...</div>
+            <button type="submit" id="create-button">Crear</button>
         </form>
         {% include 'result-fragment.html' %}
     </body>
