@@ -70,7 +70,7 @@ def draw_base_image(
 
     img_size = calculate_image_size(bbox, margin)
 
-    image = Image.new("L", img_size, color=background_color)
+    image = Image.new("RGB", img_size, color=background_color)
     draw = ImageDraw.ImageDraw(image)
 
     offset = margin
@@ -99,23 +99,23 @@ def make_stencil(
     font_size: int,
     flip: bool = False,
     stroked: bool = True,
+    fill_color: str = "white",
+    stroke_color: str = "black",
+    background_color: str = "white",
 ) -> Image.Image:
     if stroked:
-        fill = "white"
         stroke_width = max(font_size // 50, 1)
-        stroke_color = "black"
     else:
-        fill = "black"
         stroke_width = 0
-        stroke_color = "white"
 
     image = draw_base_image(
         text,
         font_filename,
         font_size,
         stroke_width=stroke_width,
-        fill_color=fill,
+        fill_color=fill_color,
         stroke_color=stroke_color,
+        background_color=background_color,
     )
 
     if flip:

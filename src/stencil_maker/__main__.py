@@ -19,6 +19,15 @@ def main():
     parser.add_argument(
         "-F", "--flip", action="store_true", help="Flip final image horizontally"
     )
+    parser.add_argument(
+        "--fill",
+        action="store_false",
+        dest="stroked",
+        help="Fill text instead of stroke",
+    )
+    parser.add_argument("--fill-color", help="Color to fill text with")
+    parser.add_argument("--stroke-color", help="Color to draw the stroke with")
+    parser.add_argument("--background-color", help="Image background color")
     parser.add_argument("filename", help="Filename to save the image to")
 
     args = parser.parse_args()
@@ -30,7 +39,16 @@ def main():
         return
 
     try:
-        image = make_stencil(text, args.font, args.size, flip=args.flip)
+        image = make_stencil(
+            text,
+            args.font,
+            args.size,
+            flip=args.flip,
+            stroked=args.stroked,
+            fill_color=args.fill_color,
+            stroke_color=args.stroke_color,
+            background_color=args.background_color,
+        )
     except OSError as err:
         eprint(f"Could not load font file '{args.font}': {err}")
         return

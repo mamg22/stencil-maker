@@ -8,7 +8,7 @@ wheels/
 
 # venv
 .venv
-fonts/*
+fonts/
 .vscode/settings.json
 
 .env

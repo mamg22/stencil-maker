@@ -1,38 +1,96 @@
 {%- set flip_checked = "checked" if request.args['flip'] == "on" -%}
 {%- set fill_checked = "checked" if request.args['fill'] == "on" -%}
 {%- set size_value = request.args.get("fontsize", 300) -%}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
         <script src="https://unpkg.com/htmx.org@2.0.0"></script>
         <script defer src="{{ url_for('static', filename='main.js')}}"></script>
         <!-- <link rel="stylesheet" href="https://unpkg.com/simpledotcss/simple.min.css"> -->
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}"
+        />
     </head>
     <body>
-        <form id="params" action="{{ url_for('index') }}"
-            hx-get="{{ url_for('result') }}" hx-target="#result" hx-swap="outerHTML"
-            hx-disabled-elt="#create-button">
+        <form
+            id="params"
+            action="{{ url_for('index') }}"
+            hx-get="{{ url_for('result') }}"
+            hx-target="#result"
+            hx-swap="outerHTML"
+            hx-disabled-elt="#create-button"
+        >
             <label>
-                Texto:<br>
-                <textarea rows="6" cols="30" name="text" required id="text">{{ request.args.text }}</textarea>
+                Texto:<br />
+                <textarea rows="6" cols="30" name="text" required id="text">
+                  {{ request.args.text }}
+                </textarea>
             </label>
             <fieldset>
                 <legend>Opciones</legend>
                 <label>
-                    <input type="checkbox" name="flip" id="flip" {{ flip_checked }}>Voltear
+                    <input
+                        type="checkbox"
+                        name="flip"
+                        id="flip"
+                        {{ flip_checked }}
+                    />Voltear
                 </label>
-                <br>
+                <br />
                 <label>
-                    <input type="checkbox" name="fill" id="fill" {{ fill_checked }}>Rellenar
+                    <input
+                        type="checkbox"
+                        name="fill"
+                        id="fill"
+                        {{ fill_checked }}
+                    />Rellenar
                 </label>
-                <br>
+                <br />
                 <label>
                     Tamaño de letra:
-                    <input type="number" name="fontsize" id="fontsize" min="1" max="500" value="{{ size_value }}">
+                    <input
+                        type="number"
+                        name="fontsize"
+                        id="fontsize"
+                        min="1"
+                        max="500"
+                        value="{{ size_value }}"
+                    />
+                    px
+                </label>
+                <br />
+                <label>
+                    Color de relleno:
+                    <input
+                        type="color"
+                        name="fill_color"
+                        id="fill_color"
+                        value="#ffffff"
+                    />
+                </label>
+                <br />
+                <label>
+                    Color de trazo:
+                    <input
+                        type="color"
+                        name="stroke_color"
+                        id="stroke_color"
+                        value="#000000"
+                    />
+                </label>
+                <br />
+                <label>
+                    Color de fondo:
+                    <input
+                        type="color"
+                        name="background_color"
+                        id="background_color"
+                        value="#ffffff"
+                    />
                 </label>
             </fieldset>
             <div class="spacer"></div>

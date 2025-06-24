@@ -64,6 +64,9 @@ def generate_stencil():
     stroked = not request.args.get("fill") == "on"
     size = request.args.get("fontsize", 300, type=int)
     image_format = request.args.get("format", "png")
+    fill_color = request.args.get("fill_color", "#FFFFFF")
+    stroke_color = request.args.get("stroke_color", "#FFFFFF")
+    background_color = request.args.get("background_color", "#FFFFFF")
     download = request.args.get("download") == "true"
 
     if size not in range(1, 500 + 1):
@@ -77,6 +80,9 @@ def generate_stencil():
         size,
         flip=flip,
         stroked=stroked,
+        fill_color=fill_color,
+        stroke_color=stroke_color,
+        background_color=background_color,
     )
 
     bio = BytesIO()
