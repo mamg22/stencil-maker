@@ -1,5 +1,8 @@
+from collections.abc import Iterable
 from io import BytesIO
+import itertools
 import os
+from pathlib import Path
 import sys
 
 try:
@@ -25,18 +28,28 @@ load_dotenv()
 
 app = Flask(__name__)
 
-try:
-    FONT: str = os.path.expanduser(os.environ["STENCIL_MAKER_FONT"])
-except KeyError:
-    print(
-        "Font is not defined, set STENCIL_MAKER_FONT to the font file or font name to use",
-        file=sys.stderr,
+
+def load_fonts() -> Iterable[Path]:
+    font_directories = [
+        Path(p)
+        for p in (
+            "/usr/share/fonts/",
+            "/usr/local/share/fonts/",
+            "~/.local/share/fonts/",
+            ".",
+        )
+    ]
+
+    font_files = itertools.chain.from_iterable(
+        d.rglob("*.[ot]tf") for d in font_directories
     )
+
+    return font_files
 
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", font_files=load_fonts())
 
 
 @app.route("/fragments/result")
@@ -60,6 +73,7 @@ def generate_stencil():
 
     text = text.replace("\r\n", "\n")
 
+    font = request.args.get("font")
     flip = request.args.get("flip") == "on"
     stroked = not request.args.get("fill") == "on"
     size = request.args.get("fontsize", 300, type=int)
@@ -73,10 +87,12 @@ def generate_stencil():
         return f"Invalid font size '{size}'", 400
     if image_format not in {"png", "jpeg"}:
         return f"Unsupported image format '{image_format}'", 400
+    if not font:
+        return f"Invalid font `{font}`", 400
 
     stencil = make_stencil(
         text,
-        FONT,
+        font,
         size,
         flip=flip,
         stroked=stroked,

@@ -92,6 +92,15 @@
                         value="#ffffff"
                     />
                 </label>
+                <br />
+                <label>
+                    Fuente:
+                    <select name="font" id="font">
+                        {% for font_file in font_files | sort %}
+                            <option value="{{ font_file }}">{{ font_file.stem }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
             </fieldset>
             <div class="spacer"></div>
             <div class="htmx-indicator">Cargando...</div>
